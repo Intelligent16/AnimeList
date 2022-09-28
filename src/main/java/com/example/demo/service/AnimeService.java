@@ -5,6 +5,7 @@ import com.example.demo.repository.AnimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,5 +52,15 @@ public class AnimeService {
         return animeRepository.save(foundAnime);
     }
 
+    public List<Anime> findAnime(String searchName) {
+        List<Anime> list = getAll();
+        List<Anime> finds = new ArrayList<>();
+        for (Anime item : list) {
+            if (item.getName().toLowerCase().contains(searchName.toLowerCase())) {
+                finds.add(item);
+            }
+        }
+        return finds;
+    }
 }
 
